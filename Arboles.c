@@ -70,6 +70,7 @@ void postOrden(nodoArbolstProducto * nodo)
         mostrarNodo(nodo);
     }
 }
+
 //Muestra el arbol en in orden
 void inOrden(nodoArbolstProducto * nodo)
 {

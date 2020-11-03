@@ -41,8 +41,51 @@ nodoArbolstProducto* insertarNodoArbol(nodoArbolstProducto* raiz, stProducto pro
 }
 
 //Muestra el contenido del arbol, de 3 formas distintas, a eleccion del usuario
-void mostrarArbol(nodoArbolstProducto* raiz)
+void mostrarNodo(nodoArbolstProducto* raiz)
 {
-
-
+    //Verificamos que el producto no este eliminado para poder mostrarlo
+    if (raiz->producto.eliminado == 0)
+    {
+        mostrarProducto(raiz->producto);
+    }
+}
+void preOrden(nodoArbolstProducto * nodo)
+{
+    if(nodo != NULL)
+    {
+        mostrarNodo(nodo);
+        preOrden(nodo->izq);
+        preOrden(nodo->der);
+    }
+}
+void postOrden(nodoArbolstProducto * nodo)
+{
+    if(nodo != NULL)
+    {
+        postOrden(nodo->izq);
+        postOrden(nodo->der);
+        mostrarNodo(nodo);
+    }
+}
+void inOrden(nodoArbolstProducto * nodo)
+{
+    if(nodo != NULL)
+    {
+        inOrden(nodo->izq);
+        mostrarNodo(nodo);
+        inOrden(nodo->der);
+    }
+}
+void mostrar(nodoArbolstProducto * raiz,int modoMostrar)
+{
+    //Organizamos un menu con las distintas formas de mostrar el arbol de producto
+    switch(modoMostrar)
+    {
+        case 1 : preOrden(raiz);
+            break;
+        case 2 : inOrden(raiz);
+            break;
+        case 3 : postOrden(raiz);
+            break;
+    }
 }

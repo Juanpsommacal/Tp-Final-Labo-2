@@ -95,3 +95,50 @@ void mostrar(nodoArbolstProducto * raiz, int modoMostrar)
             break;
     }
 }
+
+//Busca el nodo de mas izquierda del arbol
+nodoArbolstProducto* buscarMasIzquierda(nodoArbolstProducto* raiz)
+{
+    if(raiz!= NULL)
+    {
+        //Si la izquierda del nodo en el que estamos en esta vuelta no es NULL, repetimos la funcion
+        if(raiz->izq != NULL)
+        {
+            raiz = buscarMasIzquierda(raiz->izq);
+        }
+    }
+    return raiz;
+}
+
+//Busca el nodo de mas derecha del arbol
+nodoArbolstProducto* buscarMasDerecha(nodoArbolstProducto* raiz)
+{
+    if(raiz!= NULL)
+    {
+        //Si la derecha del nodo en el que estamos en esta vuelta no es NULL, repetimos la funcion
+        if(raiz->der != NULL)
+        {
+            raiz = buscarMasDerecha(raiz->der);
+        }
+    }
+    return raiz;
+}
+
+//Devuelve 1 si el nodoArbol es hoja, 0 si no lo es
+int esHoja(nodoArbolstProducto* raiz)
+{
+    int flag = 0;
+
+    if((raiz->izq == NULL) && (raiz->der == NULL))
+    {
+        flag = 1;
+    }
+    return flag;
+}
+
+//Busca un producto por su ID en el arbol y lo elimina
+nodoArbolstProducto* cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar)
+{
+
+
+}

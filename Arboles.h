@@ -33,4 +33,13 @@ void inOrden(nodoArbolstProducto * nodo);
 //Muestra el contenido del arbol, de 3 formas distintas
 void mostrar(nodoArbolstProducto * raiz, int modoMostrar);
 
+//Busca el nodo de mas izquierda del arbol
+nodoArbolstProducto* buscarMasIzquierda(nodoArbolstProducto* raiz);
+
+//Busca el nodo de mas derecha del arbol
+nodoArbolstProducto* buscarMasDerecha(nodoArbolstProducto* raiz);
+
+//Devuelve 1 si el nodoArbol es hoja, 0 si no lo es
+int esHoja(nodoArbolstProducto* raiz);
+
 #endif // ARBOLES_H_INCLUDED

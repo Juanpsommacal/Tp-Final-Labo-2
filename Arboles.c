@@ -89,3 +89,101 @@ void mostrar(nodoArbolstProducto * raiz,int modoMostrar)
             break;
     }
 }
+//Funcion que permite analizar si el nodo es hoja, es decir, uno de los ultimos nodos
+int esHoja(nodoArbolstProducto * arbol)
+{
+    if ((arbol->izq == NULL)&&(arbol->der == NULL))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+//Funcion para borrar un nodo por idProducto
+nodoArbolstProducto * borrarNodo(nodoArbolstProducto * nodo,int idProducto)
+{
+    if(nodo == NULL)
+    {
+
+    }
+    else
+    {
+        if(nodo->producto.idProducto == idProducto)
+        {
+            if(nodo->izq!=NULL)
+            {
+                nodoArbolstProducto * masDerecha = nodoMasDerecha(nodo->izq);
+                nodo->producto = masDerecha->producto;
+                nodo->izq = borrarNodo(nodo->izq,masDerecha->producto.idProducto);
+            }
+            else if (nodo->der!=NULL)
+            {
+                nodoArbolstProducto * masIzquierda = nodoMasIzquierda(nodo->der);
+                nodo->producto = masIzquierda->producto;
+                nodo->der = borrarNodo(nodo->der,masIzquierda->producto.idProducto);
+            }
+
+            else
+            {
+                if (esHoja(nodo) == 1)
+                {
+                    free(nodo);
+                    nodo = NULL;
+                }
+            }
+        }
+        else if (idProducto > nodo->producto.idProducto)
+        {
+            nodo->der = borrarNodo(nodo->der,idProducto);
+        }
+        else if (idProducto < nodo->producto.idProducto)
+        {
+             nodo->izq = borrarNodo(nodo->izq,idProducto);
+        }
+
+    }
+    return nodo;
+}
+//Funcion para retornar el nodo mas a la derecha del arbol
+nodoArbolstProducto * nodoMasDerecha(nodoArbolstProducto * nodo)
+{
+    if (nodo!=NULL)
+    {
+        if (nodo->der!=NULL)
+        {
+            nodo = nodoMasDerecha(nodo->der);
+        }
+    }
+    return nodo;
+}
+//Funcion para retornar el nodo mas a la izquierda del arbol
+nodoArbolstProducto * nodoMasIzquierda(nodoArbolstProducto * nodo)
+{
+    if (nodo!=NULL)
+    {
+        if (nodo->izq!=NULL)
+        {
+            nodo = nodoMasIzquierda(nodo->izq);
+        }
+    }
+    return nodo;
+}
+//Funcion para buscar el nodo por idProducto
+nodoArbolstProducto * buscarPorIdProducto (nodoArbolstProducto * nodo,int idProducto)
+{
+    nodoArbolstProducto * aux;
+    if (nodo!=NULL)
+    {
+        if (nodo->producto.idProducto == idProducto)
+        {
+            aux = nodo;
+        }else
+        {
+            buscarPorLegajo(nodo->der,idProducto);
+            buscarPorLegajo(nodo->izq,idProducto);
+        }
+    }
+    return aux;
+}

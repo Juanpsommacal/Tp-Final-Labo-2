@@ -17,4 +17,6 @@ typedef struct
     int eliminado; // 0: Activo; 1: Eliminado
 }stCliente;
 
+
+
 #endif // CLIENTE_H_INCLUDED

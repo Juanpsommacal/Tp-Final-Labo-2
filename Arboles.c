@@ -43,10 +43,14 @@ nodoArbolstProducto* insertarNodoArbol(nodoArbolstProducto* raiz, stProducto pro
 //Muestra un nodo de un arbol si no figura como eliminado
 void mostrarNodo(nodoArbolstProducto* raiz)
 {
-    if(raiz->producto.eliminado == 0)
+    if(raiz != NULL)
     {
-        mostrarProducto(raiz->producto);
+        if(raiz->producto.eliminado == 0)
+        {
+            mostrarProducto(raiz->producto);
+        }
     }
+
 }
 
 //Muestra el arbol en pre orden
@@ -136,9 +140,43 @@ int esHoja(nodoArbolstProducto* raiz)
     return flag;
 }
 
-//Busca un producto por su ID en el arbol y lo elimina
-nodoArbolstProducto* cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar)
+//Busca un nodo en un arbol y lo retorna
+nodoArbolstProducto* buscarNodoArbol(nodoArbolstProducto* raiz, int idABuscar)
 {
-
-
+    nodoArbolstProducto* aux = raiz;
+    if(aux != NULL)
+    {
+        if(aux->producto.idProducto < idABuscar)
+        {
+            aux = buscarNodoArbol(aux->der, idABuscar);
+        }
+        else if(aux->producto.idProducto > idABuscar)
+        {
+            aux = buscarNodoArbol(aux->izq, idABuscar);
+        }
+    }
+    return aux;
 }
+
+//Busca un producto por su ID en el arbol y lo elimina, devuelve 1 si se cambio con exito, o 0 si no se pudo cambiar
+int cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar)
+{
+    int flag = 0;
+    nodoArbolstProducto* aux;
+    if(raiz != NULL)
+    {
+        //Buscamos el producto que tenga la misma ID
+        aux = buscarNodoArbol(raiz, idABorrar);
+
+        //Si lo encuentra, cambiamos el estado y le asignamos 1 al flag
+        if(aux != NULL)
+        {
+            aux->producto.eliminado = 1;
+            flag = 1;
+        }
+    }
+    //Retornamos el flag
+    return flag;
+}
+
+

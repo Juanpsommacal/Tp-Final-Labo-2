@@ -42,4 +42,10 @@ nodoArbolstProducto* buscarMasDerecha(nodoArbolstProducto* raiz);
 //Devuelve 1 si el nodoArbol es hoja, 0 si no lo es
 int esHoja(nodoArbolstProducto* raiz);
 
+//Busca un nodo en un arbol y lo retorna
+nodoArbolstProducto* buscarNodoArbol(nodoArbolstProducto* raiz, int idABuscar);
+
+//Busca un producto por su ID en el arbol y lo elimina, devuelve 1 si se cambio con exito, o 0 si no se pudo cambiar
+int cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar);
+
 #endif // ARBOLES_H_INCLUDED

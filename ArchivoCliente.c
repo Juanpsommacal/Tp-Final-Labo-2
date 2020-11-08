@@ -1,24 +1,53 @@
 #include "ArchivoCliente.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-int VerificarIdAstronauta(char nombreArchivo[], int id) // Devuelve 1 si la id ya pertenece a otro astronauta
+//Retorna la cantidad de clientes que hay en el archivo
+int contarCantidadClientes(char nombreArchivo[])
 {
-    FILE* archivoAstro;
-    int flag = 0;
-    stAstronauta astronauta;
-    archivoAstro = fopen(nombreArchivo, "rb");
-    if(archivoAstro != NULL)
+    FILE* archivo;
+    int contador = 0;
+    stCliente cliente;
+
+    archivo = fopen(nombreArchivo, "rb");
+    //Si el archivo no es nulo
+    if(archivo != NULL)
     {
-        while(fread(&astronauta, sizeof(stAstronauta), 1, archivoAstro) > 0)
+        while(fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
         {
-            if(astronauta.id == id)
+            //Contamos cada cliente que haya en el archivo
+            contador++;
+        }
+        fclose(archivo);
+    }
+    else
+        printf("\nError al abrir el archivo %s (contarCantidadClientes)", nombreArchivo);
+
+    return contador;
+}
+
+// Devuelve 1 si la id ya pertenece a otro cliente
+int VerificarIdCliente(char nombreArchivo[], int id)
+{
+    FILE* archivo;
+    int existe = 0;
+    stCliente cliente;
+    archivo = fopen(nombreArchivo, "rb");
+
+    if(archivo != NULL)
+    {
+        while(fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
+        {
+            if(cliente.idCliente == id)
             {
-                printf("\nEsta ID ya pertenece a %s %s", astronauta.apellido, astronauta.nombre);
-                flag = 1;
+                //Si la ID ya pertenece a otro cliente, notificamos a quien y cambiamos el valor de "existe"
+                printf("\nEsta ID ya pertenece a %s %s", cliente.apellido, cliente.nombre);
+                existe = 1;
             }
         }
-        fclose(archivoAstro);
+        fclose(archivo);
     }else
-        printf("\nError al abrir el archivo %s (VerificarIdAstronauta)", nombreArchivo);
+        printf("\nError al abrir el archivo %s (VerificarIdCliente)", nombreArchivo);
 
-    return flag;
+    return existe;
 }

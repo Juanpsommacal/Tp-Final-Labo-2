@@ -1,6 +1,7 @@
 #ifndef PRODUCTO_H_INCLUDED
 #define PRODUCTO_H_INCLUDED
 
+
 typedef struct
 {
     int idProducto;
@@ -12,5 +13,8 @@ typedef struct
 
 //Muestra un producto
 void mostrarProducto(stProducto producto);
+
+//Agrega un nuevo producto al sistema
+stProducto cargarProducto();
 
 #endif // PRODUCTO_H_INCLUDED

@@ -1,5 +1,6 @@
 #include "Arboles.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 //Inicializa los valores de un arbol en NULL para el correcto funcionamiento de los demas algoritmos
 nodoArbolstProducto* inicializarArbol()
@@ -179,4 +180,23 @@ int cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar)
     return flag;
 }
 
+//Carga un arbol binario desde el archivo de productos ordenados por ID
+nodoArbolstProducto* cargarArbolDesdeArchivo(char nombreArchivo[])
+{
+    FILE* archivo;
 
+    //Primero contamos la cantidad de productos que hay en el archivo para poder distribuir bien los datos en el arbol
+    int cantProductos = contarCantidadProductos(nombreArchivo);
+    cantProductos = cantProductos / 2
+
+
+    archivo = fopen(nombreArchivo, "rb");
+    if(archivo != NULL)
+    {
+        //Movemos el cursor hacia la mitad del archivo
+        fseek(archivo, (cantProductos * sizeof(stProducto)), SEEK_SET);
+
+    }
+
+
+}

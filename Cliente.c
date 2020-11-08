@@ -1,84 +1,81 @@
+#include "Cliente.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "string.h"
+const char archivoCliente[20] = "clientes.bin";
+
+
+//Muestra un cliente
+void mostrarCliente(stCliente cliente)
+{
+    printf("\nNumero de ID: %i", cliente.idCliente);
+    printf("\nNombre: %s", cliente.nombre);
+    printf("\nApellido: %s", cliente.apellido);
+    printf("\nGenero: %c", cliente.genero);
+    printf("\nUsername: %s", cliente.userName);
+    printf("\neMail: %s", cliente.mail);
+    printf("\nDomicilio: %s", cliente.domicilio);
+}
+
+//Agrega un nuevo cliente al sistema
 stCliente CargarCliente()
 {
-    char term;
     stCliente cliente;
-    int flag = 0;
 
-    do
-    {
-        do
-        {
-            printf("\nIngrese la ID del cliente (maximo 5 digitos): ");
-            fflush(stdin);
-            //La siguiente linea de codigo no nos permite ingresar caracteres en el scanf.
-        }while((scanf("%d%c", &cliente.idCliente, &term) != 2 || term != '\n') || (cliente.idCliente <= 0 || cliente.idCliente >= 99999));
-    }while(VerificarIdAstronauta(archivoAstronauta, astro.id) == 1);//Se repite hasta que la ID ingresada no corresponda a ningun otro astronauta.
+    //La id de cada cliente se genera automaticamente
+    cliente.idCliente = contarCantidadClientes(archivoCliente) + 1;
+
+    printf("\nIngrese su nombre: ");
+    fflush(stdin);
+    scanf("%s", cliente.nombre);
 
     system("cls");
 
-    printf("\nIngrese el nombre del astronauta: ");
+    printf("\nIngrese su apellido: ");
     fflush(stdin);
-    scanf("%s", astro.nombre);
-
-    system("cls");
-
-    printf("\nIngrese el apellido del astronauta: ");
-    fflush(stdin);
-    scanf("%s", astro.apellido);
-
-    system("cls");
-
-    printf("\nIngrese el apodo del astronauta: ");
-    fflush(stdin);
-    scanf("%s", astro.apodo);
+    scanf("%s", cliente.apellido);
 
     system("cls");
 
     do
     {
-        printf("\nIngrese la edad del astronauta: ");
+        printf("\nIngrese su genero, F (femenino), M (masculino), O (otro): ");
         fflush(stdin);
-    }while((scanf("%d%c", &astro.edad, &term) != 2 || term != '\n') || (astro.edad < 18) || astro.edad > 100);
+        scanf("%c", cliente.genero);
+    }while( (cliente.genero != 'M') && (cliente.genero != 'm') && (cliente.genero != 'F') && (cliente.genero != 'f') && (cliente.genero != 'O') && (cliente.genero != 'o') );
 
     system("cls");
 
-    printf("\nIngrese la nacionalidad del astronauta: ");
+    printf("\nIngrese su domicilio: ");
     fflush(stdin);
-    scanf("%s", astro.nacionalidad);
+    scanf("%s", cliente.domicilio);
 
     system("cls");
 
-    printf("\nIngrese la especialidad del astronauta: ");
+    printf("\nIngrese un nombre de usuario (lo utilizara para logearse al sistema): ");
     fflush(stdin);
-    scanf("%s", astro.especialidad);
+    scanf("%s", cliente.userName);
 
     system("cls");
 
-    do
-    {
-        printf("\nIngrese las horas de vuelo totales del astronauta: ");
-        fflush(stdin);
-    }while((scanf("%d%c", &astro.horasVuelo, &term) != 2 || term != '\n') || astro.horasVuelo < 0);
+    printf("\nIngrese una direccion de eMail valida: ");
+    fflush(stdin);
+    scanf("%s", cliente.mail);
 
     system("cls");
 
-    do
-    {
-        printf("\nIngrese la cantidad de misiones que completo el astronauta: ");
-        fflush(stdin);
-    }while((scanf("%d%c", &astro.misionesRealizadas, &term) != 2 || term != '\n') || astro.misionesRealizadas < 0);
+    printf("\nIngrese una contraseña: ");
+    fflush(stdin);
+    scanf("%s", cliente.password);
 
     system("cls");
 
-    do
-    {
-        printf("\nIngrese la cantidad de horas en la EEI del astronauta: ");
-        fflush(stdin);
-    }while((scanf("%d%c", &astro.horasEstacion, &term) != 2 || term != '\n') || astro.horasEstacion < 0);
+    cliente.rol = 0;
+    cliente.eliminado = 0;
 
-    system("cls");
-
-    astro.estado = 1;
-    astro.mision = 1;
-    return astro;
+    return cliente;
 }
+
+
+
+

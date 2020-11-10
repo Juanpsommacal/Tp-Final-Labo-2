@@ -48,4 +48,7 @@ nodoArbolstProducto* buscarNodoArbol(nodoArbolstProducto* raiz, int idABuscar);
 //Busca un producto por su ID en el arbol y lo elimina, devuelve 1 si se cambio con exito, o 0 si no se pudo cambiar
 int cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar);
 
+//Carga un arbol binario desde el archivo de productos ordenados por ID
+nodoArbolstProducto* cargarArbolDesdeArchivo(char nombreArchivo[]);
+
 #endif // ARBOLES_H_INCLUDED

@@ -184,19 +184,47 @@ int cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar)
 nodoArbolstProducto* cargarArbolDesdeArchivo(char nombreArchivo[])
 {
     FILE* archivo;
-
+    //Creamos una stProducto auxiliar para cargar los datos del archivo
+    stProducto aux;
+    nodoArbolstProducto* raiz;
     //Primero contamos la cantidad de productos que hay en el archivo para poder distribuir bien los datos en el arbol
     int cantProductos = contarCantidadProductos(nombreArchivo);
-    cantProductos = cantProductos / 2
-
+    //Dividimos la cantidad de productos por 2 para poner un numero intermedio en la raiz
+    cantProductos = cantProductos / 2;
 
     archivo = fopen(nombreArchivo, "rb");
     if(archivo != NULL)
     {
         //Movemos el cursor hacia la mitad del archivo
         fseek(archivo, (cantProductos * sizeof(stProducto)), SEEK_SET);
-
+        //Pasamos del archivo al auxiliar
+        fread(&aux, sizeof(stProducto), 1, archivo);
+        //Ingresamos el producto en el arbol
+        raiz = insertarNodoArbol(raiz, aux);
+        //Volvemos al principio del archivo
+        rewind(archivo);
+        //Cargamos los numeros impares
+        while(fread(&aux, sizeof(stProducto), 1, archivo) > 0)
+        {
+            //Verifica si la id del producto es impar y si no es la misma que ya esta cargada en la raiz
+            if(aux.idProducto %2 == 1 && aux.idProducto != raiz->producto.idProducto)
+            {
+                raiz = insertarNodoArbol(raiz, aux);
+            }
+        }
+        //Volvemos otra vez al inicio
+        rewind(archivo);
+        //Ahora cargamos los numeros pares
+        while(fread(&aux, sizeof(stProducto), 1, archivo) > 0)
+        {
+            //Verifica si la id del producto es par y si no es la misma que ya esta cargada en la raiz
+            if(aux.idProducto %2 == 0 && aux.idProducto != raiz->producto.idProducto)
+            {
+                raiz = insertarNodoArbol(raiz, aux);
+            }
+        }
     }
-
-
+    else
+        printf("\nError al abrir el archivo %s (cargarArbolDesdeArchivo)", nombreArchivo);
+    return raiz;
 }

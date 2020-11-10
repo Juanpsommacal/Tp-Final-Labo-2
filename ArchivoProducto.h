@@ -8,4 +8,10 @@ int VerificarIdProducto(char nombreArchivo[], int id);
 //Retorna la cantidad de productos que hay en el archivo
 int contarCantidadProductos(char nombreArchivo[]);
 
+//Cambia el estado de un producto, devuelve 1 si se logro con exito
+int cambiarEstadoProducto(char nombreArchivo[], int id);
+
+//Busca un producto por su ID y lo muestra por pantalla
+int mostrarProductoPorId(char nombreArchivo[], int id);
+
 #endif // ARCHIVOPRODUCTO_H_INCLUDED

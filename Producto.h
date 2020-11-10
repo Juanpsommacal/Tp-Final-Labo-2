@@ -17,4 +17,5 @@ void mostrarProducto(stProducto producto);
 //Agrega un nuevo producto al sistema
 stProducto cargarProducto();
 
+
 #endif // PRODUCTO_H_INCLUDED

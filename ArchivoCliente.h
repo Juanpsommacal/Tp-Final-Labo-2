@@ -33,4 +33,9 @@ void MostrarClientePorEstado(char nombreArchivo[], int estado);
 
 //Retorna el estado del usuario
 int verificarEstado(char nombreArchivo[], int id);
+
+//Modifica un atributo de un cliente, segun la eleccion del usuario
+int ModificarCliente(char nombreArchivo[],int id, int eleccion);
+
+
 #endif // ARCHIVOCLIENTE_H_INCLUDED

@@ -14,7 +14,7 @@ int main()
     cantidadClientes = contarCantidadClientes(nombreArchivo);
     //Reservamos el espacio en la memoria
     stCelda* ADL = (stCelda*)malloc(cantidadClientes * sizeof(stCelda));*/
-    int menu = 0, validacion = 1, rolUsuario, idModificacion;
+    int menu = 0, validacion = 1, rolUsuario, idModificacion, eleccion;
     char term = '\n';
     stCliente clienteMenu;
 
@@ -133,6 +133,8 @@ int main()
                                         printf("\nEl estado del usuario se cambio con exito!!");
                                     else
                                         printf("\nEl estado del usuario no se pudo cambiar");
+                                    printf("\n");
+                                    system("pause");
                                     break;
                                 }
                             case 2:
@@ -153,10 +155,52 @@ int main()
                                         printf("\nEl estado del usuario se cambio con exito!!");
                                     else
                                         printf("\nEl estado del usuario no se pudo cambiar");
+                                    printf("\n");
+                                    system("pause");
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    do
+                                    {
+                                        do
+                                        {
+                                            system("cls");
+                                            MostrarClientePorEstado(archivoCliente, 0);
+                                            printf("\nIngrese la ID del cliente que quiere modificar: ");
+                                            printf("\n\t");
+                                            fflush(stdin);
+                                        }while(scanf("%d%c", &idModificacion, &term) != 2 || term != '\n');
+                                    }while(verificarEstado(archivoCliente, idModificacion) != 0);
+                                    do
+                                    {
+                                        do
+                                        {
+                                            system("cls");
+                                            printf("\n\tUsuario a modificar: ");
+                                            printf("\n");
+                                            MostrarClientePorId(archivoCliente, idModificacion);
+                                            printf("\nIngrese el numero del atributo que desea modificar: ");
+                                            printf("\n1: Nombre ");
+                                            printf("\n2: Apellido");
+                                            printf("\n3: Domicilio");
+                                            printf("\n4: Genero");
+                                            printf("\n5: Mail");
+                                            printf("\n6: Username");
+                                            printf("\n7: Password");
+                                        }while(scanf("%d%c", &eleccion, &term) != 2 || term != '\n');
+                                    }while(eleccion < 1 || eleccion > 7);
+                                    validacion = ModificarCliente(archivoCliente, idModificacion, eleccion);
+                                    if(validacion == 1)
+                                        printf("\nEl estado del usuario se cambio con exito!!");
+                                    else
+                                        printf("\nEl estado del usuario no se pudo cambiar");
+                                    printf("\n");
+                                    system("pause");
                                     break;
                                 }
 
-                            }
+                            }//Switch administrador clientes
                         }while(menu != 0);
                             break;//Termina el menu de administracion de clientes del ADMIN
                         }

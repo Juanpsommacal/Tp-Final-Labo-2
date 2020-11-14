@@ -247,72 +247,79 @@ int verificarEstado(char nombreArchivo[], int id)
 }
 
 //Modifica un atributo de un cliente, segun la eleccion del usuario
-/*void ModificarCliente(char nombreArchivo[],int id, int eleccion)
+int ModificarCliente(char nombreArchivo[],int id, int eleccion)
 {
-    stCliente clien;
-    char term;
-    FILE* archivoCliente = fopen(NombrearchivoClientes, "r+b");
-    if(archivoCliente != NULL)
+    int validacion = 0, flag = 0;
+    stCliente cliente;
+    FILE* archivo = fopen(nombreArchivo, "r+b");
+    if(archivo != NULL)
     {
-        while(fread(&clien, sizeof(stCliente), 1, archivoCliente) > 0)
+        while(flag == 0 && fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
         {
-            if(clien.idCliente == idCliente)
+            if(cliente.idCliente == id)
             {
+                flag = 1;
+
                 if(eleccion == 1)
                 {
-                    printf("\nIngrese el nuevo nombre del cliente o admin: ");
-                    scanf("%s", clien.nombre);
+                    printf("\nIngrese el nuevo nombre del cliente: ");
+                    fflush(stdin);
+                    scanf("%s", cliente.nombre);
                 }
                 else if(eleccion == 2)
                 {
-                    printf("\nIngrese el nuevo apellido del cliente o admin: ");
-                    scanf("%s", clien.apellido);
+                    printf("\nIngrese el nuevo apellido del cliente: ");
+                    fflush(stdin);
+                    scanf("%s", cliente.apellido);
                 }
                 else if(eleccion == 3)
                 {
-                    printf("\nIngrese el nuevo domicilio del cliente o admin: ");
-                    scanf("%s", clien.domicilio);
+                    printf("\nIngrese el nuevo domicilio del cliente: ");
+                    fflush(stdin);
+                    scanf("%s", cliente.domicilio);
                 }
                 else if(eleccion == 4)
                 {
-                    printf("\nIngrese el nuevo genero del cliente o admin: ");
-                    scanf("%s",clien.genero);
+                    do
+                    {
+                        printf("\nIngrese el nuevo genero del cliente m, f, o: ");
+                        fflush(stdin);
+                        scanf("%c", &cliente.genero);
+                    }while(cliente.genero != 'm' && cliente.genero != 'f' && cliente.genero != 'o');
                 }
                 else if(eleccion == 5)
                 {
-                    printf("\nIngrese el nuevo mail del cliente o admin: ");
-                    scanf("%s", clien.mail);
+                    printf("\nIngrese el nuevo mail del cliente: ");
+                    fflush(stdin);
+                    scanf("%s", cliente.mail);
                 }
                 else if(eleccion == 6)
                 {
-                    printf("\nIngrese el nuevo username del cliente o admin: ");
-                    scanf("%s", clien.userName);
+                    do
+                    {
+                        printf("\nIngrese el nuevo username del cliente o admin: ");
+                        fflush(stdin);
+                        if(validacion == 1)
+                            printf("\nEse username ya existe");
+                        scanf("%s", cliente.userName);
+                        validacion = verificarUserName(nombreArchivo, cliente.userName);
+                    }while(validacion == 1);
                 }
                 else if(eleccion == 7)
                 {
-                    printf("\nIngrese la nueva password del cliente o admin: ");
-                    scanf("%s", clien.password);
-                }else if(eleccion == 8)
-                {
-                    if(clien.rol == 1)
-                    {
-                        clien.rol = 0;
-                    }else if (clien.rol == 0)
-                    {
-                        clien.rol = 1;
-                    }
-
+                    printf("\nIngrese la nueva password del cliente: ");
+                    fflush(stdin);
+                    scanf("%s", cliente.password);
                 }
-                fseek(archivoCliente, -sizeof(stCliente), SEEK_CUR);
-                fwrite(&clien, sizeof(stCliente), 1, archivoCliente);
+                fseek(archivo, -sizeof(stCliente), SEEK_CUR);
+                fwrite(&cliente, sizeof(stCliente), 1, archivo);
                 break;
             }
         }
-        fclose(archivoCliente);
+        fclose(archivo);
     }else
-        printf("\nError al abrir el archivo %s (ModificarCliente)", NombrearchivoClientes);
-
-
-}*/
+        printf("\nError al abrir el archivo %s (ModificarCliente)", nombreArchivo);
+    return flag;
+}
 
 

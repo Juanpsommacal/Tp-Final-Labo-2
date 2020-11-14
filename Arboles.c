@@ -1,6 +1,5 @@
 #include "Arboles.h"
-#include <stdlib.h>
-#include <stdio.h>
+
 
 //Inicializa los valores de un arbol en NULL para el correcto funcionamiento de los demas algoritmos
 nodoArbolstProducto* inicializarArbol()

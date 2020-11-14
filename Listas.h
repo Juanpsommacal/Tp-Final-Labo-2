@@ -1,5 +1,7 @@
 #ifndef LISTAS_H_INCLUDED
 #define LISTAS_H_INCLUDED
+#include "string.h"
+#include <stdlib.h>
 #include "Producto.h"
 
 typedef struct
@@ -31,5 +33,8 @@ void mostrarLista(nodoListaProducto* lista);
 
 //Borra un nodo, buscandolo por su ID
 nodoListaProducto* borrarNodoPorIdProducto(nodoListaProducto* lista, int idABorrar);
+
+//Borra un nodo, sirve para borrar toda la lista
+nodoListaProducto * borrarNodo(nodoListaProducto * lista);
 
 #endif // LISTAS_H_INCLUDED

@@ -1,6 +1,8 @@
 #ifndef ARBOLES_H_INCLUDED
 #define ARBOLES_H_INCLUDED
-#include "Producto.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include "Listas.h"
 
 typedef struct
 {

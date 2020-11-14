@@ -1,10 +1,5 @@
 #include "Cliente.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "string.h"
-const char archivoCliente[20] = "clientes.bin";
-
-
+char archivoCliente[20] = "Clientes.bin";
 //Muestra un cliente
 void mostrarCliente(stCliente cliente)
 {
@@ -15,6 +10,12 @@ void mostrarCliente(stCliente cliente)
     printf("\nUsername: %s", cliente.userName);
     printf("\neMail: %s", cliente.mail);
     printf("\nDomicilio: %s", cliente.domicilio);
+}
+
+//Muestra solo el username y la id de un cliente
+void mostrarClienteResumido(stCliente cliente)
+{
+    printf("\n%s: %i", cliente.userName, cliente.idCliente);
 }
 
 //Agrega un nuevo cliente al sistema

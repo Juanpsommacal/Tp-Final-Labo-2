@@ -1,7 +1,7 @@
 #include "Producto.h"
-#include <stdlib.h>
-#include <stdio.h>
-const char archivoProducto[20] = "productos.bin";
+char archivoProducto[20] = "Productos.bin";
+
+
 
 
 //Muestra un producto
@@ -37,3 +37,4 @@ stProducto cargarProducto()
 
     return producto;
 }
+

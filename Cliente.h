@@ -1,7 +1,8 @@
 #ifndef CLIENTE_H_INCLUDED
 #define CLIENTE_H_INCLUDED
-#include "Listas.h"
-#include "Arboles.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "string.h"
 
 typedef struct
 {
@@ -19,6 +20,9 @@ typedef struct
 
 //Muestra un cliente
 void mostrarCliente(stCliente cliente);
+
+//Muestra solo el username y la id de un cliente
+void mostrarClienteResumido(stCliente cliente);
 
 //Agrega un nuevo cliente al sistema
 stCliente CargarCliente();

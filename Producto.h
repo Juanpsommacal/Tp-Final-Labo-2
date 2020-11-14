@@ -1,6 +1,7 @@
 #ifndef PRODUCTO_H_INCLUDED
 #define PRODUCTO_H_INCLUDED
-
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct
 {

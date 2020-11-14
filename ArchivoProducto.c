@@ -1,6 +1,5 @@
 #include "ArchivoProducto.h"
-#include <stdlib.h>
-#include <stdio.h>
+
 
 // Devuelve 1 si la id ya pertenece a otro producto
 int VerificarIdProducto(char nombreArchivo[], int id)
@@ -112,4 +111,18 @@ int mostrarProductoPorId(char nombreArchivo[], int id)
     return flag;
 }
 
-
+//Recibe un producto y lo guarda en el archivo
+void ingresarProductoAlArchivo(char nombreArchivo[], stProducto producto)
+{
+    FILE* archivo;
+    archivo = fopen(nombreArchivo, "ab");
+    if(archivo != NULL)
+    {
+        fwrite(&producto, sizeof(stProducto), 1, archivo);
+        fclose(archivo);
+    }
+    else
+    {
+        printf("\nError al abrir el archivo %s (ingresarProductoAlArchivo)", nombreArchivo);
+    }
+}

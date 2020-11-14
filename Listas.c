@@ -1,6 +1,5 @@
-#include <stdlib.h>
 #include "Listas.h"
-#include "string.h"
+
 
 //Inicializa los valores de la lista en NULL para el correcto funcionamiento del resto de los algoritmos
 nodoListaProducto* inicializarLista()
@@ -158,6 +157,19 @@ nodoListaProducto* borrarNodoPorIdProducto(nodoListaProducto* lista, int idABorr
                 free(seguidora);
             }
         }
+    }
+    return lista;
+}
+
+//Borra un nodo, sirve para borrar toda la lista
+nodoListaProducto * borrarNodo(nodoListaProducto * lista)
+{
+    nodoListaProducto * aux;
+    if(lista!=NULL)
+    {
+        aux = lista;
+        lista = lista->siguiente;
+        free(aux);
     }
     return lista;
 }

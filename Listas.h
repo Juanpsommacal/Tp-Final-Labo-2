@@ -37,4 +37,6 @@ nodoListaProducto* borrarNodoPorIdProducto(nodoListaProducto* lista, int idABorr
 //Borra un nodo, sirve para borrar toda la lista
 nodoListaProducto * borrarNodo(nodoListaProducto * lista);
 
+//Suma el total de costos de la lista
+float contarTotalPedido(nodoListaProducto* lista);
 #endif // LISTAS_H_INCLUDED

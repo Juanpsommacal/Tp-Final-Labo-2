@@ -1,8 +1,7 @@
 #ifndef ARREGLOCLIENTES_H_INCLUDED
 #define ARREGLOCLIENTES_H_INCLUDED
 #include <stdio.h>
-#include "ArchivoCliente.h"
-#include "ArchivoProducto.h"
+#include "ArchivoPedido.h"
 
 typedef struct
 {
@@ -18,16 +17,18 @@ int buscarCliente(stCelda celda[],int idCliente[],int validos);
 int agregarCliente(stCelda celda[],stCliente cliente,int validos);
 
 //LLama a agregarCliente y le agrega la lista de productos
-int alta (stCelda celda[],int validos,stCliente cliente,stProducto producto);
+int alta (stCelda celda[], int validos, stCliente cliente, nodoListaProducto* lista);
 
 //Muestra el arreglo
-void mostrarArreglo (stCelda celda [20],int validos);
+void mostrarArreglo (stCelda celda[],int validos);
 
 //Borra las listas de producto del arreglo
 void limpiarArregloListas (stCelda celda[20],int validos);
 
-//Prueba
-int ingresarDatos (stCelda celda[],int dimension);
+//Cuenta los productos de un arbol, llama a ContarNodos
+int numeroDeProductos(nodoArbolstProducto* raiz, int* contador);
+
+
 
 
 #endif // ARREGLOCLIENTES_H_INCLUDED

@@ -39,7 +39,7 @@ int VerificarIdCliente(char nombreArchivo[], int id)
             if(cliente.idCliente == id)
             {
                 //Si la ID ya pertenece a otro cliente, notificamos a quien y cambiamos el valor de "existe"
-                printf("\nEsta ID ya pertenece a %s %s", cliente.apellido, cliente.nombre);
+                printf("\nEsta ID pertenece a %s %s", cliente.apellido, cliente.nombre);
                 existe = 1;
             }
         }
@@ -112,19 +112,22 @@ int MostrarClientePorId(char nombreArchivo[], int id)
 }
 
 //Recibe un cliente y lo guarda en el archivo
-void ingresarClienteAlArchivo(char nombreArchivo[], stCliente cliente)
+int ingresarClienteAlArchivo(char nombreArchivo[], stCliente cliente)
 {
     FILE* archivo;
+    int flag = 0;
     archivo = fopen(nombreArchivo, "ab");
     if(archivo != NULL)
     {
         fwrite(&cliente, sizeof(stCliente), 1, archivo);
         fclose(archivo);
+        flag = 1;
     }
     else
     {
         printf("\nError al abrir el archivo %s (ingresarClienteAlArchivo)", nombreArchivo);
     }
+    return flag;
 }
 
 //Verifica si el username ya existe, devuelve 1 si existe
@@ -199,8 +202,8 @@ int verificarRol(char nombreArchivo[], char username[])
     return rol;
 }
 
-//Recibe un estado y muestra todos los clientes con ese estado
-void MostrarClientePorEstado(char nombreArchivo[], int estado)
+//Recibe un estado y muestra todos los clientes con ese estado. resumido = 1 muestra resumido, si es 0 muestra toda la descripcion
+void MostrarClientePorEstado(char nombreArchivo[], int estado, int resumido)
 {
     FILE* archivo;
     stCliente cliente;
@@ -211,7 +214,10 @@ void MostrarClientePorEstado(char nombreArchivo[], int estado)
         {
             if(cliente.eliminado == estado)
             {
-                mostrarClienteResumido(cliente);
+                if(resumido == 1)
+                    mostrarClienteResumido(cliente);
+                else
+                    mostrarCliente(cliente);
             }
         }
         fclose(archivo);
@@ -311,9 +317,12 @@ int ModificarCliente(char nombreArchivo[],int id, int eleccion)
                     fflush(stdin);
                     scanf("%s", cliente.password);
                 }
+                else if(eleccion == 8)
+                {
+                    cliente.rol = 1;
+                }
                 fseek(archivo, -sizeof(stCliente), SEEK_CUR);
                 fwrite(&cliente, sizeof(stCliente), 1, archivo);
-                break;
             }
         }
         fclose(archivo);
@@ -322,4 +331,102 @@ int ModificarCliente(char nombreArchivo[],int id, int eleccion)
     return flag;
 }
 
+//Retorna la cantidad de clientes que hay en el archivo por estado
+int contarCantidadClientesPorEstado(char nombreArchivo[], int estado)
+{
+    FILE* archivo;
+    int contador = 0;
+    stCliente cliente;
+
+    archivo = fopen(nombreArchivo, "rb");
+    //Si el archivo no es nulo
+    if(archivo != NULL)
+    {
+        while(fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
+        {
+            //Contamos cada cliente que cumpla con el estado que se pide por parametro
+            if(cliente.eliminado == estado)
+                contador++;
+        }
+        fclose(archivo);
+    }
+    else
+        printf("\nError al abrir el archivo %s (contarCantidadClientes)", nombreArchivo);
+
+    return contador;
+}
+
+//Muestra un cliente, buscandolo por su username
+void mostrarClientePorUsername(char nombreArchivo[], char username[])
+{
+    FILE* archivo;
+    stCliente cliente;
+    archivo = fopen(nombreArchivo, "rb");
+    if(archivo != NULL)
+    {
+        while(fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
+        {
+            if(strcmp(cliente.userName, username) == 0)
+            {
+                mostrarCliente(cliente);
+            }
+        }
+        fclose(archivo);
+    }
+    else
+    {
+        printf("Error al abrir el archivo %s (MostrarClientePorUsername)", nombreArchivo);
+    }
+
+}
+
+//Retorna la id de un cliente, buscandolo por su username
+int retornarIDClientePorUsername(char nombreArchivo[], char username[])
+{
+    int flag = 0;
+    FILE* archivo;
+    stCliente cliente;
+    archivo = fopen(nombreArchivo, "rb");
+    if(archivo != NULL)
+    {
+        while(flag == 0 && fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
+        {
+            if(strcmp(cliente.userName, username) == 0)
+            {
+                flag = cliente.idCliente;
+            }
+        }
+        fclose(archivo);
+    }
+    else
+    {
+        printf("Error al abrir el archivo %s (MostrarClientePorUsername)", nombreArchivo);
+    }
+    return flag;
+}
+
+//Retorna la struct cliente buscandolo por ID
+stCliente retornarStClientePorId(char nombreArchivo[], int id)
+{
+    int flag = 0;
+    FILE* archivo;
+    stCliente cliente;
+    archivo = fopen(nombreArchivo, "rb");
+    if(archivo != NULL)
+    {
+        while(flag == 0 && fread(&cliente, sizeof(stCliente), 1, archivo) > 0)
+        {
+            if(cliente.idCliente == id)
+            {
+                flag = 1;
+            }
+        }
+        fclose(archivo);
+    }
+    else
+    {
+        printf("Error al abrir el archivo %s (retornarStClientePorId)", nombreArchivo);
+    }
+    return cliente;
+}
 

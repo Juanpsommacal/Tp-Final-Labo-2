@@ -18,5 +18,7 @@ void mostrarProducto(stProducto producto);
 //Agrega un nuevo producto al sistema
 stProducto cargarProducto();
 
+//Muestra la marca, nombre y la id de un producto
+void mostrarProductoResumido(stProducto producto);
 
 #endif // PRODUCTO_H_INCLUDED

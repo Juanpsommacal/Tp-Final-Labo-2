@@ -186,6 +186,7 @@ nodoArbolstProducto* cargarArbolDesdeArchivo(char nombreArchivo[])
     //Creamos una stProducto auxiliar para cargar los datos del archivo
     stProducto aux;
     nodoArbolstProducto* raiz;
+    raiz = inicializarArbol(raiz);
     //Primero contamos la cantidad de productos que hay en el archivo para poder distribuir bien los datos en el arbol
     int cantProductos = contarCantidadProductos(nombreArchivo);
     //Dividimos la cantidad de productos por 2 para poner un numero intermedio en la raiz
@@ -227,3 +228,27 @@ nodoArbolstProducto* cargarArbolDesdeArchivo(char nombreArchivo[])
         printf("\nError al abrir el archivo %s (cargarArbolDesdeArchivo)", nombreArchivo);
     return raiz;
 }
+
+//Cuenta los productos de un arbol, llama a ContarNodos
+int numeroDeProductos(nodoArbolstProducto* raiz, int* contador)
+{
+    *contador = 0;
+
+    contarNodos(raiz, contador);
+
+    return *contador;
+}
+
+//Cuenta los productos de un arbol
+void contarNodos(nodoArbolstProducto* raiz, int* contador)
+{
+    if(raiz != NULL)
+    {
+        (*contador)++;
+        contarNodos(raiz->izq, contador);
+        contarNodos(raiz->der, contador);
+    }
+
+}
+
+

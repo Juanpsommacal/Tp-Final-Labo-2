@@ -173,3 +173,30 @@ nodoListaProducto * borrarNodo(nodoListaProducto * lista)
     }
     return lista;
 }
+
+//Suma el total de costos de la lista
+float contarTotalPedido(nodoListaProducto* lista)
+{
+    float costoTotal = 0;
+    while(lista != NULL)
+    {
+        costoTotal += lista->producto.precio;
+        lista = lista->siguiente;
+    }
+    return costoTotal;
+}
+
+int buscarProductoEnLista(nodoListaProducto* lista, int id)
+{
+    int flag = 0;
+    while(lista != NULL)
+    {
+        if(lista->producto.idProducto == id)
+            flag = 1;
+        else
+            lista = lista->siguiente;
+    }
+
+    return flag;
+}
+

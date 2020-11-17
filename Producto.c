@@ -2,33 +2,31 @@
 char archivoProducto[20] = "Productos.bin";
 
 
-
-
 //Muestra un producto
 void mostrarProducto(stProducto producto)
 {
     printf("\nNumero de ID: %i", producto.idProducto);
-    printf("\nNombre: %s", producto.nombre);
     printf("\nMarca: %s", producto.marca);
+    printf("\nNombre: %s", producto.nombre);
     printf("\nPrecio: $%.2f", producto.precio);
+    printf("\n------------------------------------------");
 }
 
 //Agrega un nuevo producto al sistema
 stProducto cargarProducto()
 {
     stProducto producto;
-    char term;
 
     //La id de cada producto se genera automaticamente
     producto.idProducto = contarCantidadProductos(archivoProducto) + 1;
 
-    printf("\nIngrese el nombre del producto: ");
-    fflush(stdin);
-    scanf("%s", &producto.nombre);
-
     printf("\nIngrese la marca del producto: ");
     fflush(stdin);
-    scanf("%s", &producto.marca);
+    gets(producto.marca);
+
+    printf("\nIngrese el nombre del producto: ");
+    fflush(stdin);
+    gets(producto.nombre);
 
     printf("\nIngrese el precio del producto: ");
     scanf("%f", &producto.precio);
@@ -38,3 +36,8 @@ stProducto cargarProducto()
     return producto;
 }
 
+//Muestra la marca, nombre y la id de un producto
+void mostrarProductoResumido(stProducto producto)
+{
+    printf("\n%s %s: %i", producto.marca, producto.nombre, producto.idProducto);
+}

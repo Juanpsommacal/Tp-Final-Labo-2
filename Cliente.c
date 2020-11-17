@@ -10,6 +10,7 @@ void mostrarCliente(stCliente cliente)
     printf("\nUsername: %s", cliente.userName);
     printf("\neMail: %s", cliente.mail);
     printf("\nDomicilio: %s", cliente.domicilio);
+    printf("\n------------------------------------------");
 }
 
 //Muestra solo el username y la id de un cliente
@@ -26,15 +27,16 @@ stCliente CargarCliente()
     //La id de cada cliente se genera automaticamente
     cliente.idCliente = contarCantidadClientes(archivoCliente) + 1;
 
+    system("cls");
     printf("\nIngrese su nombre: ");
     fflush(stdin);
-    scanf("%s", cliente.nombre);
+    gets(cliente.nombre);
 
     system("cls");
 
     printf("\nIngrese su apellido: ");
     fflush(stdin);
-    scanf("%s", cliente.apellido);
+    gets(cliente.apellido);
 
     system("cls");
 
@@ -42,32 +44,32 @@ stCliente CargarCliente()
     {
         printf("\nIngrese su genero, F (femenino), M (masculino), O (otro): ");
         fflush(stdin);
-        scanf("%c", cliente.genero);
-    }while( (cliente.genero != 'M') && (cliente.genero != 'm') && (cliente.genero != 'F') && (cliente.genero != 'f') && (cliente.genero != 'O') && (cliente.genero != 'o') );
+        scanf("%c", &cliente.genero);
+    }while((cliente.genero != 'f') && (cliente.genero != 'o') && (cliente.genero != 'm'));
 
     system("cls");
 
     printf("\nIngrese su domicilio: ");
     fflush(stdin);
-    scanf("%s", cliente.domicilio);
+    gets(cliente.domicilio);
 
     system("cls");
 
     printf("\nIngrese un nombre de usuario (lo utilizara para logearse al sistema): ");
     fflush(stdin);
-    scanf("%s", cliente.userName);
+    gets(cliente.userName);
 
     system("cls");
 
     printf("\nIngrese una direccion de eMail valida: ");
     fflush(stdin);
-    scanf("%s", cliente.mail);
+    gets(cliente.mail);
 
     system("cls");
 
     printf("\nIngrese una contraseña: ");
     fflush(stdin);
-    scanf("%s", cliente.password);
+    gets(cliente.password);
 
     system("cls");
 

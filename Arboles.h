@@ -53,4 +53,9 @@ int cambiarEstadoNodoArbol(nodoArbolstProducto* raiz, int idABorrar);
 //Carga un arbol binario desde el archivo de productos ordenados por ID
 nodoArbolstProducto* cargarArbolDesdeArchivo(char nombreArchivo[]);
 
+//Cuenta los productos de un arbol, llama a ContarNodos
+int numeroDeProductos(nodoArbolstProducto* raiz, int* contador);
+
+//Cuenta los productos de un arbol
+void contarNodos(nodoArbolstProducto* raiz, int* contador);
 #endif // ARBOLES_H_INCLUDED
